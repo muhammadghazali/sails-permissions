@@ -1,5 +1,5 @@
 {
-  "name": "sails-permissions",
+  "name": "@muhammadghazali/sails-permissions",
   "version": "1.4.5",
   "description": "Comprehensive user permissions and entitlements system for sails.js and Waterline. Supports user authentication with passport.js, role-based permissioning, object ownership, and row-level security.",
   "main": "api/hooks/sails-permissions.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/tjwebb/sails-permissions.git"
+    "url": "https://github.com/muhammadghazali/sails-permissions.git"
   },
   "keywords": [
     "sails",
@@ -32,9 +32,9 @@
   "author": "Travis Webb <me@traviswebb.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/tjwebb/sails-permissions/issues"
+    "url": "https://github.com/muhammadghazali/sails-permissions.git"
   },
-  "homepage": "https://github.com/tjwebb/sails-permissions",
+  "homepage": "https://github.com/muhammadghazali/sails-permissions.git",
   "devDependencies": {
     "jshint": "^2.8.0",
     "mocha": "^2.x.x",
