@@ -74,7 +74,7 @@ function responsePolicy (_data, options) {
     .then(function (results) {
       //sails.log.verbose('results', results);
       var permitted = _.filter(results, function (result) {
-        return _.any(req.permissions, function (permission) {
+        return _.some(req.permissions, function (permission) {
           return permission.permits(result.relation, method);
         });
       });

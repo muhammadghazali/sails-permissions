@@ -1,7 +1,7 @@
 // api/services/passport.js
 
 var _ = require('lodash');
-var _super = require('sails-auth/api/services/passport');
+var _super = require('@muhammadghazali/sails-auth/api/services/passport');
 
 function passport () { }
 

@@ -20,7 +20,7 @@ module.exports = {
     if (!_.isArray(objects)) {
       return PermissionService.isForeignObject(user.id)(objects);
     }
-    return _.any(objects, PermissionService.isForeignObject(user.id));
+    return _.some(objects, PermissionService.isForeignObject(user.id));
   },
 
   /**
@@ -94,7 +94,7 @@ module.exports = {
           or: [{
             user: user.id
           }, {
-            role: _.pluck(user.roles, 'id')
+            role: _.map(user.roles, 'id')
           }]
         }).populate('criteria');
       });
@@ -320,7 +320,7 @@ module.exports = {
       return User.find({
         username: usernames
       }).then(function(users) {
-        role.users.add(_.pluck(users, 'id'));
+        role.users.add(_.map(users, 'id'));
         return role.save();
       });
     });
@@ -341,21 +341,27 @@ module.exports = {
       usernames = [usernames];
     }
 
+    var role;
+
     return Role.findOne({
         name: rolename
       })
       .populate('users')
-      .then(function(role) {
+      .then(function(foundRole) {
+        role = foundRole;
+
         return User.find({
           username: usernames
         }, {
           select: ['id']
-        }).then(function(users) {
-          users.map(function(users) {
-            role.users.remove(user.id);
-          });
-          return role.save();
         });
+      })
+      .then(function(users) {
+        for (var i = 0; i < users.length; i++) {
+          role.users.remove(users[i].id);
+        }
+
+        return role.save();
       });
   },
 

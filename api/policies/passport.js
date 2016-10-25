@@ -1,3 +1,3 @@
 // api/policies/passport.js
 
-module.exports = require('sails-auth/api/policies/passport');
+module.exports = require('@muhammadghazali/sails-auth/api/policies/passport');

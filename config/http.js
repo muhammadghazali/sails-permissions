@@ -12,8 +12,8 @@
 module.exports.http = {
 
   middleware: {
-    passportInit: require('sails-auth/node_modules/passport').initialize(),
-    passportSession: require('sails-auth/node_modules/passport').session(),
+    passportInit: require('@muhammadghazali/sails-auth/node_modules/passport').initialize(),
+    passportSession: require('@muhammadghazali/sails-auth/node_modules/passport').session(),
 
 
     // The order in which middleware should be run for HTTP request.

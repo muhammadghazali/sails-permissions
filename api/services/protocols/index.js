@@ -1,6 +1,6 @@
 
 var _ = require('lodash');
-var _super = require('sails-auth/api/services/protocols/index');
+var _super = require('@muhammadghazali/sails-auth/api/services/protocols/index');
 
 _.merge(exports, _super);
 _.merge(exports, {

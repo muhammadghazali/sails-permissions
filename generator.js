@@ -1,5 +1,5 @@
 module.exports = require('sails-generate-entities')({
-  module: 'sails-permissions',
+  module: '@muhammadghazali/sails-permissions',
   id: 'permissions-api',
   statics: [
     'api/models/Model.js',
@@ -9,11 +9,11 @@ module.exports = require('sails-generate-entities')({
     'api/models/User.js',
     'api/models/RequestLog.js',
     'api/models/SecurityLog.js',
-                                            
+
     'api/controllers/ModelController.js',
     'api/controllers/PermissionController.js',
     'api/controllers/RoleController.js',
-                                            
+
     'config/permissions.js',
 
     // sails-auth
@@ -27,7 +27,7 @@ module.exports = require('sails-generate-entities')({
   classes: [
     'api/services/ModelService.js',
     'api/services/PermissionService.js',
-    
+
     // sails-auth
     'api/services/passport.js',
     'api/services/protocols/local.js',

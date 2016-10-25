@@ -1,12 +1,15 @@
+var _ = require('lodash');
+
 var permissionPolicies = [
-  'passport',
-  'sessionAuth',
   'ModelPolicy',
+  'AuditPolicy',
   'OwnerPolicy',
   'PermissionPolicy',
-  'RolePolicy'
+  'RolePolicy',
+  'CriteriaPolicy'
 ];
-module.exports = function (sails) {
+
+module.exports = function sailsPermissions(sails) {
   return {
     identity: 'permissions',
 
@@ -21,20 +24,19 @@ module.exports = function (sails) {
       sails.config.blueprints.populate = false;
     },
     initialize: function (next) {
-      sails.log.info('permissions: initializing sails-permissions hook');
+      sails.log.debug('permissions: initializing sails-permissions hook');
 
       if (!validateDependencies(sails)) {
-        sails.log.error('Cannot find sails-auth hook. Did you "npm install sails-auth --save"?');
-        sails.log.error('Please see README for installation instructions: https://github.com/tjwebb/sails-permissions');
+        sails.log.error('Cannot find sails-auth hook. Did you "npm install @muhammadghazali/sails-auth --save"?');
+        sails.log.error('Please see README for installation instructions: https://github.com/muhammadghazali/sails-auth/atg-custom');
         return sails.lower();
       }
 
       if (!validatePolicyConfig(sails)) {
         sails.log.error('One or more required policies are missing.');
-        sails.log.error('Please see README for installation instructions: https://github.com/tjwebb/sails-permissions');
+        sails.log.error('Please see README for installation instructions: https://github.com/muhammadghazali/sails-permissions/atg-custom');
         return sails.lower();
       }
-
 
       sails.after(sails.config.permissions.afterEvent, function () {
           installModelOwnership(sails);
@@ -70,7 +72,7 @@ function initializeFixtures (sails) {
     .then(function (models) {
       this.models = models;
 
-      sails.hooks['sails-permissions']._modelCache = _.indexBy(models, 'identity');
+      sails.hooks['sails-permissions']._modelCache = _.keyBy(models, 'identity');
 
       return require('../../config/fixtures/role').create();
     })
@@ -118,11 +120,19 @@ function installModelOwnership (sails) {
 
 function validatePolicyConfig (sails) {
   var policies = sails.config.policies;
-  return _.all([
-    _.isArray(policies['*']),
-    _.intersection(permissionPolicies, policies['*']).length === permissionPolicies.length,
-    policies.AuthController && _.contains(policies.AuthController['*'], 'passport')
-  ]);
+  var validations = [];
+
+  validations.push(_.isArray(policies['*']));
+  validations.push(policies.hasOwnProperty('AuthController'));
+
+  // TODO why do we need to allow public access the AuthController
+  // _.contains(policies.AuthController['*']
+
+  for (var i = 0; i < permissionPolicies.length; i++) {
+    validations.push(_.includes(policies['*'], permissionPolicies[i]));
+  }
+
+  return _.every(validations);
 }
 
 function validateDependencies (sails) {

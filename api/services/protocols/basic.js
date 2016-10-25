@@ -1,3 +1,3 @@
 // api/services/protocols/basic.js
 
-module.exports = require('sails-auth/api/services/protocols/basic');
+module.exports = require('@muhammadghazali/sails-auth/api/services/protocols/basic');

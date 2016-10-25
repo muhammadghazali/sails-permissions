@@ -1,3 +1,3 @@
 // api/policies/basicAuth.js
 
-module.exports = require('sails-auth/api/policies/basicAuth');
+module.exports = require('@muhammadghazali/sails-auth/api/policies/basicAuth');

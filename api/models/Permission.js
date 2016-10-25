@@ -26,12 +26,12 @@ module.exports = {
     action: {
       type: 'string',
       index: true,
-      notNull: true,
+      notNull: true
       /**
        * TODO support permissions based on all controller actions, including
        * custom ones
        */
-      enum: []
+      // enum: []
     },
 
     relation: {

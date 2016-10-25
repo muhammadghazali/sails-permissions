@@ -623,12 +623,12 @@ describe('Permission Service', function() {
       });
 
       ok = ok.then(function (role) {
-        assert(_.contains(_.pluck(role.users, 'id'), user.id));
+        assert(_.contains(_.map(role.users, 'id'), user.id));
         return PermissionService.removeUsersFromRole('test', 'admin');
       });
 
       ok = ok.then(function (role) {
-        assert(!_.contains(_.pluck(role.users, 'id'), user.id));
+        assert(!_.contains(_.map(role.users, 'id'), user.id));
       })
       .done(done, done);
 

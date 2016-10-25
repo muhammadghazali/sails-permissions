@@ -1,6 +1,6 @@
 
 var _ = require('lodash');
-var _super = require('sails-auth/config/passport');
+var _super = require('@muhammadghazali/sails-auth/config/passport');
 
 _.merge(exports, _super);
 _.merge(exports, {
